@@ -37,7 +37,7 @@ function FieldChangedItemName(type,name){
 				
             if(dupfound == true){                
                 alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
-				return true;
+				return false;
             }
         }
     } 
@@ -78,5 +78,6 @@ function CheckItemName(type,name){
 			return false;
 		}
 	}
+	return true;
 }
 
