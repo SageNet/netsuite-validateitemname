@@ -8,25 +8,23 @@
 function FieldChangedItemName(type,name){
 	//alert('Running...nice deployment, Ace!');
 
-    if(name == 'name'){
-        var item = nlapiGetFieldValue('name');	
-		alert('Sweet!  name==name -- which is:'+item);	
+    if(name == 'itemid'){
+        var item = nlapiGetFieldValue('itemid');	
+		alert('Sweet!  name==itemid -- which is:'+item);	
 
         if(item != null && item != ''){
-            item_id = nlapiGetRecordId();
             dupfound = false;
-			alert('Item_id: '+item_id);
 
             var filters = new Array();	
-            if(item_id != null && item_id != '')
-                filters[0] = new nlobjSearchFilter('name',null,'noneof',name);	
+            filters[0] = new nlobjSearchFilter('itemid',null,'noneof',itemid);
+			
             var columns = new Array();	
-            columns[0] = new nlobjSearchColumn('name');					
+            columns[0] = new nlobjSearchColumn('itemid');					
         
             var item_record = nlapiSearchRecord('item',null,filters,columns);	
 
             for(var s=0; item_record != null && s < item_record.length; s++){
-                var existingItem = item_record[s].getValue('name');
+                var existingItem = item_record[s].getValue('itemid');
                 if(existingItem.toLowerCase() != item.toLowerCase())
                     continue;
 								
@@ -42,3 +40,35 @@ function FieldChangedItemName(type,name){
     }   					 
 }
 
+function CheckItemName(type,name){
+	//alert('Running...nice deployment, Ace!');
+
+	var item = nlapiGetFieldValue('itemid');	
+	alert('Sweet! Item name is: '+item);	
+
+	if(item != null && item != ''){
+		dupfound = false;
+
+		var filters = new Array();	
+		filters[0] = new nlobjSearchFilter('itemid',null,'noneof',itemid);
+		
+		var columns = new Array();	
+		columns[0] = new nlobjSearchColumn('itemid');					
+	
+		var item_record = nlapiSearchRecord('item',null,filters,columns);	
+
+		for(var s=0; item_record != null && s < item_record.length; s++){
+			var existingItem = item_record[s].getValue('itemid');
+			if(existingItem.toLowerCase() != item.toLowerCase())
+				continue;
+							
+			dupfound = true;
+			break;
+		}
+		alert('dupfound: '+dupfound);	
+			
+		if(dupfound == true){                
+			alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
+		}
+	}
+}
