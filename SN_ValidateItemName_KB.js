@@ -16,7 +16,7 @@ function FieldChangedItemName(type,name){
             dupfound = false;
 
             var filters = new Array();	
-            filters[0] = new nlobjSearchFilter('itemid',null,'noneof',itemid);
+            filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
 			
             var columns = new Array();	
             columns[0] = new nlobjSearchColumn('itemid');					
@@ -54,7 +54,7 @@ function CheckItemName(type,name){
 		dupfound = false;
 
 		var filters = new Array();	
-		filters[0] = new nlobjSearchFilter('itemid',null,'noneof',itemid);
+		filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
 		
 		var columns = new Array();	
 		columns[0] = new nlobjSearchColumn('itemid');					
