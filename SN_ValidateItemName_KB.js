@@ -25,6 +25,8 @@ function FieldChangedItemName(type,name){
 
             for(var s=0; item_record != null && s < item_record.length; s++){
                 var existingItem = item_record[s].getValue('itemid');
+				alert('existingItem: '+existingItem);
+				
                 if(existingItem.toLowerCase() != item.toLowerCase())
                     continue;
 								
@@ -35,9 +37,11 @@ function FieldChangedItemName(type,name){
 				
             if(dupfound == true){                
                 alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
+				return true;
             }
         }
-    }   					 
+    } 
+	return true;
 }
 
 function CheckItemName(type,name){
@@ -59,6 +63,8 @@ function CheckItemName(type,name){
 
 		for(var s=0; item_record != null && s < item_record.length; s++){
 			var existingItem = item_record[s].getValue('itemid');
+			alert('existingItem: '+existingItem);
+			
 			if(existingItem.toLowerCase() != item.toLowerCase())
 				continue;
 							
@@ -69,6 +75,8 @@ function CheckItemName(type,name){
 			
 		if(dupfound == true){                
 			alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
+			return false;
 		}
 	}
 }
+
