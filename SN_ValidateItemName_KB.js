@@ -10,12 +10,12 @@ function FieldChangedItemName(type,name){
 
     if(name == 'name'){
         var item = nlapiGetFieldValue('name');	
-		alert('Sweet!  name==name -- which is:'&item);	
+		alert('Sweet!  name==name -- which is:'+item);	
 
         if(item != null && item != ''){
             item_id = nlapiGetRecordId();
             dupfound = false;
-			alert('Item_id: '&item_id);
+			alert('Item_id: '+item_id);
 
             var filters = new Array();	
             if(item_id != null && item_id != '')
@@ -33,7 +33,7 @@ function FieldChangedItemName(type,name){
                 dupfound = true;
                 break;
             }
-			alert('dupfound: '&dupfound);	
+			alert('dupfound: '+dupfound);	
 				
             if(dupfound == true){                
                 alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
