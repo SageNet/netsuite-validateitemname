@@ -13,11 +13,9 @@ function FieldChangedItemName(type,name){
             item_id = nlapiGetRecordId();
             dupfound = false;
 						
-            var filters = new Array();
-            filters[0] = new nlobjSearchFilter('mainline',null,'is','T');
-            filters[1] = new nlobjSearchFilter('name',null,'isnotempty',null);	
+            var filters = new Array();	
             if(item_id != null && item_id != '')
-                filters[2] = new nlobjSearchFilter('internalid',null,'noneof',item_id);	
+                filters[0] = new nlobjSearchFilter('name',null,'noneof',name);	
             var columns = new Array();	
             columns[0] = new nlobjSearchColumn('name');					
         
