@@ -10,22 +10,24 @@ function FieldChangedItemName(type,name){
 
     if(name == 'itemid'){
         var item = nlapiGetFieldValue('itemid');	
-		alert('Sweet!  name==itemid -- which is:'+item);	
+		//alert('Sweet!  name==itemid -- which is:'+item);	
 
         if(item != null && item != ''){
             dupfound = false;
 
-            var filters = new Array();	
-            filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
+            //var filters = new Array();	
+            //filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
 			
-            var columns = new Array();	
-            columns[0] = new nlobjSearchColumn('itemid');					
+            //var columns = new Array();	
+            //columns[0] = new nlobjSearchColumn('itemid');					
         
-            var item_record = nlapiSearchRecord('item',null,filters,columns);	
+            //var item_record = nlapiSearchRecord('item',null,filters,columns);	
 
-            for(var s=0; item_record != null && s < item_record.length; s++){
-                var existingItem = item_record[s].getValue('itemid');
-				alert('existingItem: '+existingItem);
+			var item_record_gs = nlapiSearchGlobal(item);	
+			
+            for(var s=0; item_record_gs != null && s < item_record_gs.length; s++){
+                var existingItem = item_record_gs[s].getValue('name');
+				//alert('existingItem: '+existingItem);
 				
                 if(existingItem.toLowerCase() != item.toLowerCase())
                     continue;
@@ -33,7 +35,7 @@ function FieldChangedItemName(type,name){
                 dupfound = true;
                 break;
             }
-			alert('dupfound: '+dupfound);	
+			//alert('dupfound: '+dupfound);	
 				
             if(dupfound == true){                
                 alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
@@ -53,16 +55,18 @@ function CheckItemName(type,name){
 	if(item != null && item != ''){
 		dupfound = false;
 
-		var filters = new Array();	
-		filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
+		//var filters = new Array();	
+		//filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
 		
-		var columns = new Array();	
-		columns[0] = new nlobjSearchColumn('itemid');					
+		//var columns = new Array();	
+		//columns[0] = new nlobjSearchColumn('itemid');					
 	
-		var item_record = nlapiSearchRecord('item',null,filters,columns);	
+		//var item_record = nlapiSearchRecord('item',null,filters,columns);	
 
-		for(var s=0; item_record != null && s < item_record.length; s++){
-			var existingItem = item_record[s].getValue('itemid');
+		var item_record_gs = nlapiSearchGlobal(item);	
+		
+		for(var s=0; item_record_gs != null && s < item_record_gs.length; s++){
+			var existingItem = item_record_gs[s].getValue('name');
 			alert('existingItem: '+existingItem);
 			
 			if(existingItem.toLowerCase() != item.toLowerCase())
