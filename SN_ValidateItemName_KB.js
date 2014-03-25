@@ -4,84 +4,77 @@
 * 
 *  (written by Kenneth Baucum, 3/21/2014)
 */
-
 function FieldChangedItemName(type,name){
-	//alert('Running...nice deployment, Ace!');
-
     if(name == 'itemid'){
-        var item = nlapiGetFieldValue('itemid');	
-		//alert('Sweet!  name==itemid -- which is:'+item);	
-
+        var item = nlapiGetFieldValue('itemid');		
         if(item != null && item != ''){
             dupfound = false;
-
-            //var filters = new Array();	
-            //filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
-			
-            //var columns = new Array();	
-            //columns[0] = new nlobjSearchColumn('itemid');					
-        
-            //var item_record = nlapiSearchRecord('item',null,filters,columns);	
-
 			var item_record_gs = nlapiSearchGlobal(item);	
-			
             for(var s=0; item_record_gs != null && s < item_record_gs.length; s++){
                 var existingItem = item_record_gs[s].getValue('name');
-				//alert('existingItem: '+existingItem);
-				
                 if(existingItem.toLowerCase() != item.toLowerCase())
                     continue;
-								
                 dupfound = true;
                 break;
             }
-			//alert('dupfound: '+dupfound);	
+            if(dupfound == true){
 				
-            if(dupfound == true){                
+				// uncomment this block to alert the user and fail the item name change.
                 alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
 				return false;
+				
+				
+				/*
+				// Uncomment this block to expose code to auto-fix the item names and such
+				switch (nlapiGetSubsidiary()) {
+					case 1:
+						// WTI
+						nlapiSetFieldText('mpn',item)
+						nlapiSetFieldText('displayname',item)
+						nlapiSetFieldText('itemid',item+' (WTI)')
+						alert('Warning: Item Number '+item+' has been used already.\n\nBut don\'t worry -- we fixed it for you.');
+						return true;
+						break;
+					case 2:
+						// SN
+						nlapiSetFieldText('mpn',item)
+						nlapiSetFieldText('displayname',item)
+						nlapiSetFieldText('itemid',item+' (SN)')
+						alert('Warning: Item Number '+item+' has been used already.\n\nBut don\'t worry -- we fixed it for you.');
+						return true;
+						break;
+					case 3:
+						// TT
+						nlapiSetFieldText('mpn',item)
+						nlapiSetFieldText('displayname',item)
+						nlapiSetFieldText('itemid',item+' (TT)')
+						alert('Warning: Item Number '+item+' has been used already.\n\nBut don\'t worry -- we fixed it for you.');
+						return true;
+						break;
+					case 4:
+						// STL
+						nlapiSetFieldText('mpn',item)
+						nlapiSetFieldText('displayname',item)
+						nlapiSetFieldText('itemid',item+' (STL)')
+						alert('Warning: Item Number '+item+' has been used already.\n\nBut don\'t worry -- we fixed it for you.');
+						return true;
+						break;
+					case 5:
+						// AP
+						nlapiSetFieldText('mpn',item)
+						nlapiSetFieldText('displayname',item)
+						nlapiSetFieldText('itemid',item+' (AP)')
+						alert('Warning: Item Number '+item+' has been used already.\n\nBut don\'t worry -- we fixed it for you.');
+						return true;
+						break;
+					default:
+						alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
+						return false;
+						break;
+				}
+				*/
             }
         }
     } 
 	return true;
 }
-
-function CheckItemName(type,name){
-	//alert('Running...nice deployment, Ace!');
-
-	var item = nlapiGetFieldValue('itemid');	
-	alert('Sweet! Item name is: '+item);	
-
-	if(item != null && item != ''){
-		dupfound = false;
-
-		//var filters = new Array();	
-		//filters[0] = new nlobjSearchFilter('itemid',null,'equalTo',item);
-		
-		//var columns = new Array();	
-		//columns[0] = new nlobjSearchColumn('itemid');					
-	
-		//var item_record = nlapiSearchRecord('item',null,filters,columns);	
-
-		var item_record_gs = nlapiSearchGlobal(item);	
-		
-		for(var s=0; item_record_gs != null && s < item_record_gs.length; s++){
-			var existingItem = item_record_gs[s].getValue('name');
-			alert('existingItem: '+existingItem);
-			
-			if(existingItem.toLowerCase() != item.toLowerCase())
-				continue;
-							
-			dupfound = true;
-			break;
-		}
-		alert('dupfound: '+dupfound);	
-			
-		if(dupfound == true){                
-			alert('Warning: Item Number '+item+' has been used already.\n\nIf you were not able to find it, it may be part of another subsidiary.\nJust follow the instructions on this page to correct.');
-			return false;
-		}
-	}
-	return true;
-}
-
